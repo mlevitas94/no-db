@@ -9,6 +9,11 @@ var heroes = [{
     "name": "Reaper",
     "role": "Damage"
 
+},
+{
+    "id": 3,
+    "name": "Widowmaker",
+    "role": "Damage"
 }
 
 ];
@@ -32,7 +37,5 @@ module.exports = {
         heroes.push(newHero);
         res.status(200).send(heroes)
     },
-
-
 
 }

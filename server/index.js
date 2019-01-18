@@ -5,7 +5,9 @@ const cr = require('./controller')
 const app = express()
 app.use(bodyParser.json())
 
+app.get('/api/heroes', cr.getHeroes )
 
+app.post('/api/heroes', cr.addHero)
 
 
 
