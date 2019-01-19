@@ -18,5 +18,6 @@ code {
   height: 80vh;
   border: solid 1px grey;
   background-color: grey;
+  display: flex;
   
 }

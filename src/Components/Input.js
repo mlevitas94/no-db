@@ -16,8 +16,15 @@ class Input extends Component{
     render(){
         return(
             <div>
-                <input onChange={(e) => this.updateUserInput(e.target.value)} placeholder="Enter Hero Name"/>
-                
+                <input onChange={(e) => this.updateUserInput(e.target.value)}
+                 onKeyPress= {(e) => {
+                     if(e.key === 'Enter'){
+                         this.props.filter(this.state.userInput)
+                          }
+                        }
+                    }
+                     placeholder="Enter hero name"/>
+                <button onClick={() => this.props.filter(this.state.userInput)}>Filter Heroes</button>
             </div>
         );
     }
