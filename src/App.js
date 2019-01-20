@@ -18,13 +18,21 @@ class App extends Component {
 
     this.filterHeroes = this.filterHeroes.bind(this)
     this.addHeroInfo = this.addHeroInfo.bind(this)
+    this.editHero = this.editHero.bind(this)
   }
+
+
+
 
   filterHeroes(val){
     this.setState({
       filteredInput: val
     })
   }
+
+
+
+
 
   addHeroInfo(heroName, role){
     console.log("clicked")
@@ -40,6 +48,29 @@ class App extends Component {
     }) 
     
 }
+
+
+
+
+editHero(id, name, role){
+  console.log(id)
+  let editedInfo = {
+    "id": id,
+    "name": name,
+    "role": role
+  }
+
+  axios.put('/api/heroes', editedInfo)
+  .then(response => {
+    this.setState({
+      heroes: response.data
+    })
+  })
+}
+
+
+
+
 
   componentDidMount(){
     axios.get('/api/heroes')
@@ -65,6 +96,8 @@ class App extends Component {
           key={i}
           name={hero["name"]}
           role={hero["role"]}
+          id={hero["id"]}
+          edit={this.editHero}
           />
         )
       }
@@ -82,7 +115,7 @@ class App extends Component {
 
         </div>
 
-        <AddHero add={this.addHeroInfo(heroName, role)}/>
+        <AddHero add={this.addHeroInfo}/>
       
       </div>
     );

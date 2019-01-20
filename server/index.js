@@ -9,6 +9,8 @@ app.get('/api/heroes', cr.getHeroes )
 
 app.post('/api/heroes', cr.addHero)
 
+app.put('/api/heroes', cr.editHero)
+
 
 
 app.listen(4000,()=>{
