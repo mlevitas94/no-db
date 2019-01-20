@@ -11,6 +11,8 @@ app.post('/api/heroes', cr.addHero)
 
 app.put('/api/heroes', cr.editHero)
 
+app.delete('/api/heroes', cr.deleteHero)
+
 
 
 

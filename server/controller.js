@@ -63,6 +63,15 @@ module.exports = {
         res.status(200).send(heroes)
 
         
+    },
+
+    deleteHero: (req, res) => {
+        const {body} = req;
+        console.log(body)
+        heroes = heroes.filter(hero => 
+        body["id"] !== hero["id"])
+
+        res.status(200).send(heroes)
     }
 
 }

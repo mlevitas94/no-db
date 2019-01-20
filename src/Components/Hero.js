@@ -7,7 +7,9 @@ class Hero extends Component{
         this.state ={
             allowEdit: false,
             editedName: "",
-            editedRole: ""
+            editedRole: "",
+            deleteConfirm: false
+            
         }
     }
 
@@ -32,6 +34,8 @@ class Hero extends Component{
 
     render(){
         const id = this.props.id;
+        const name = this.props.name;
+        const role = this.props.role;
 
         return(
             <div className="HeroBox">
@@ -39,7 +43,14 @@ class Hero extends Component{
                 {/*img of the hero*/}
                 <p>{this.props.role}</p>
 
-                <button onClick={() => this.diplayEditInfo()}>Edit info</button>
+                <button style={{display:this.state.allowEdit ? 'none' : 'inline-block'}}
+                onClick={() => this.diplayEditInfo()}>Edit info</button>
+                
+                <br/>
+
+                <button onClick={() => this.props.delete(id, name, role)}
+                style={{display: this.state.deleteConfirm ? 'none' : 'inline-block',
+                display:this.state.allowEdit ? 'none': 'inline-block' }}>Delete Hero</button>
 
                 <div style ={{display: this.state.allowEdit ? 'block' : 'none' }}>
                     <input onChange={(e) => this.nameInput(e.target.value)}

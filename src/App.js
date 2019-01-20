@@ -19,6 +19,7 @@ class App extends Component {
     this.filterHeroes = this.filterHeroes.bind(this)
     this.addHeroInfo = this.addHeroInfo.bind(this)
     this.editHero = this.editHero.bind(this)
+    this.deleteHero = this.deleteHero.bind(this)
   }
 
 
@@ -53,7 +54,6 @@ class App extends Component {
 
 
 editHero(id, name, role){
-  console.log(id)
   let editedInfo = {
     "id": id,
     "name": name,
@@ -61,6 +61,22 @@ editHero(id, name, role){
   }
 
   axios.put('/api/heroes', editedInfo)
+  .then(response => {
+    this.setState({
+      heroes: response.data
+    })
+  })
+}
+
+deleteHero(id, name, role){
+  let toBeDeleted = {
+    "id" : id,
+    "name" : name,
+    "role" : role
+  }
+  console.log(toBeDeleted)
+
+  axios.delete('/api/heroes', toBeDeleted)
   .then(response => {
     this.setState({
       heroes: response.data
@@ -98,6 +114,7 @@ editHero(id, name, role){
           role={hero["role"]}
           id={hero["id"]}
           edit={this.editHero}
+          delete={this.deleteHero}
           />
         )
       }
