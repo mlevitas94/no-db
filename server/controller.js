@@ -47,8 +47,12 @@ module.exports = {
 
         heroes = heroes.map((hero) => {
             if(hero["id"] === body["id"]){
-                hero["name"] = body["name"];
-                hero["role"] = body["role"]
+                if(body["name"] !== ""){
+                    hero["name"] = body["name"];
+                }
+                if(body["role"] !== ""){
+                    hero["role"] = body["role"];
+                }
             }
 
             return hero

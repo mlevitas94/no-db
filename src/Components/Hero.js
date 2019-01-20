@@ -42,11 +42,39 @@ class Hero extends Component{
                 <button onClick={() => this.diplayEditInfo()}>Edit info</button>
 
                 <div style ={{display: this.state.allowEdit ? 'block' : 'none' }}>
-                    <input onChange={(e) => this.nameInput(e.target.value)} placeholder="Name..."/>
+                    <input onChange={(e) => this.nameInput(e.target.value)}
+                     placeholder="Name..."
+                     onKeyPress= {(e) => {
+                        if(e.key === 'Enter'){
+                            this.props.edit(id, this.state.editedName, this.state.editedRole)
+                            this.setState({allowEdit:false})
+                             }
+                           }
+                       }
+                     />
                     <br/>
-                    <input onChange={(e) => this.roleInput(e.target.value)} placeholder = "Role..."/>
+
+                    <input onChange={(e) => this.roleInput(e.target.value)}
+                     placeholder = "Role..."
+                     onKeyPress= {(e) => {
+                        if(e.key === 'Enter'){
+                            this.props.edit(id, this.state.editedName, this.state.editedRole)
+                            this.setState({allowEdit:false})
+                             }
+                           }
+                       }
+
+                     />
                     <br/>
-                    <button onClick={() => this.props.edit(id, this.state.editedName, this.state.editedRole)}>Make changes</button>
+
+                    <button onClick={() => {
+                        this.props.edit(id, this.state.editedName, this.state.editedRole)
+                        this.setState({allowEdit:false})
+                    }}
+                    
+                    >Make changes</button>
+
+                    
                 </div>
 
 
