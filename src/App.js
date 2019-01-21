@@ -91,7 +91,6 @@ deleteHero(id){
       this.setState({
         heroes: response.data
       })
-      console.log(this.state.heroes)
     })
   }
 
@@ -112,17 +111,30 @@ deleteHero(id){
         return false
       }
     }).map((hero, i) => {
-      return (
-          <Hero
-          key={i}
-          name={hero["name"]}
-          id={hero["id"]}
-          edit={this.editHero}
-          delete={this.deleteHero}
-          imgSrc={require('./images/' + hero["id"] + '.png')}
-          allHeroes = {this.state.heroes} 
-          />
-        )
+      if(hero["id"] < 25){
+          return (
+            <Hero
+            key={i}
+            name={hero["name"]}
+            id={hero["id"]}
+            edit={this.editHero}
+            delete={this.deleteHero}
+            imgSrc={require('./images/' + hero["id"] + '.png')}
+            allHeroes = {this.state.heroes} 
+            />
+          )
+        }else{
+          return (
+            <Hero
+            key={i}
+            name={hero["name"]}
+            id={hero["id"]}
+            edit={this.editHero}
+            delete={this.deleteHero}
+            allHeroes = {this.state.heroes} 
+            />
+          )
+        }
       }
     )
 

@@ -31,9 +31,11 @@ class Hero extends Component{
         const id = this.props.id;
         const name = this.props.name;
 
-        for(var i = 0; i < this.props.allHeroes; i++){
-            if(this.props.allHeroes[i] !== name){
-                this.setState({allowImage:false})
+        let imgControl = () => {
+            if(id < 26){
+                return(
+                    <img style={{display:'block'}} src = {this.props.imgSrc}/>
+                )
             }
         }
 
@@ -42,11 +44,8 @@ class Hero extends Component{
                 <h2>{this.props.name} </h2>
                 <br/>
 
-                <img
-                style={{display: this.state.allowImage ? 'block' : 'none'}}
-                src = {this.props.imgSrc}/>
 
-               
+                {imgControl()}
 
                 <div style={{display:this.state.allowEdit ? 'none' : 'inline-block'}}>
                     <button onClick={() =>{ 
