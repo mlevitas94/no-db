@@ -7,8 +7,8 @@ class Hero extends Component{
         this.state ={
             allowEdit: false,
             editedName: "",
-            editedRole: "",
-            deleteConfirm: false
+            deleteConfirm: false,
+            allowImage: true
             
         }
     }
@@ -25,26 +25,28 @@ class Hero extends Component{
         })
     }
 
-    roleInput(val){
-        this.setState({
-            editedRole:val
-        })
-    }
 
 
     render(){
         const id = this.props.id;
         const name = this.props.name;
-        const role = this.props.role;
+
+        for(var i = 0; i < this.props.allHeroes; i++){
+            if(this.props.allHeroes[i] !== name){
+                this.setState({allowImage:false})
+            }
+        }
 
         return(
             <div className="HeroBox">
                 <h2>{this.props.name} </h2>
                 <br/>
 
-                <img src = {this.props.imgSrc}/>
+                <img
+                style={{display: this.state.allowImage ? 'block' : 'none'}}
+                src = {this.props.imgSrc}/>
 
-                <p>{this.props.role}</p>
+               
 
                 <div style={{display:this.state.allowEdit ? 'none' : 'inline-block'}}>
                     <button onClick={() =>{ 
@@ -62,7 +64,7 @@ class Hero extends Component{
                 <div style={{display: this.state.deleteConfirm ? 'block' : 'none'}}>
                     <p>Are you sure?</p>
                     <button onClick={() => {
-                        this.props.delete(id, name, role)
+                        this.props.delete(id, name)
                         this.setState({deleteConfirm:false})}}>Yes</button>
                     <button onClick={() => this.setState({deleteConfirm:false})}>No</button>
                 </div>
@@ -74,7 +76,7 @@ class Hero extends Component{
                     placeholder="Name..."
                     onKeyPress= {(e) => {
                         if(e.key === 'Enter'){
-                            this.props.edit(id, this.state.editedName, this.state.editedRole)
+                            this.props.edit(id, this.state.editedName)
                             this.setState({allowEdit:false})
                              }
                            }
@@ -82,22 +84,9 @@ class Hero extends Component{
                      />
                     <br/>
 
-                    <input className="HeroInput"
-                    onChange={(e) => this.roleInput(e.target.value)}
-                    placeholder = "Role..."
-                    onKeyPress= {(e) => {
-                        if(e.key === 'Enter'){
-                            this.props.edit(id, this.state.editedName, this.state.editedRole)
-                            this.setState({allowEdit:false})
-                             }
-                           }
-                       }
-
-                     />
-                    <br/>
 
                     <button onClick={() => {
-                        this.props.edit(id, this.state.editedName, this.state.editedRole)
+                        this.props.edit(id, this.state.editedName)
                         this.setState({allowEdit:false})
                     }}
                     

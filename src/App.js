@@ -35,11 +35,9 @@ class App extends Component {
 
 
 
-  addHeroInfo(heroName, role){
-    console.log("clicked")
+  addHeroInfo(heroName){
     let newHero = {
         "name": heroName,
-        "role": role
     }
     axios.post('/api/heroes', newHero)
     .then(response => {
@@ -53,11 +51,10 @@ class App extends Component {
 
 
 
-editHero(id, name, role){
+editHero(id, name){
   let editedInfo = {
     "id": id,
-    "name": name,
-    "role": role
+    "name": name
   }
 
   axios.put('/api/heroes', editedInfo)
@@ -119,11 +116,11 @@ deleteHero(id){
           <Hero
           key={i}
           name={hero["name"]}
-          role={hero["role"]}
           id={hero["id"]}
           edit={this.editHero}
           delete={this.deleteHero}
-          imgSrc={require('./images/' + hero["name"] + '.png')} 
+          imgSrc={require('./images/' + hero["id"] + '.png')}
+          allHeroes = {this.state.heroes} 
           />
         )
       }

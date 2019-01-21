@@ -4,14 +4,16 @@ var heroes = [
 
 ];
 
-id = heroes.length +1;
+id = 24
 
 axios.get('https://overwatch-api.net/api/v1/hero')
 .then(response => {
-    heroes = response.data[0];
-    console.log(heroes)
+
+    heroes = response.data.data
+
 })
 
+id = heroes.length +1;
 
 module.exports = {
     getHeroes : (req, res) => {
@@ -22,9 +24,8 @@ module.exports = {
         const newId = heroes[heroes.length-1].id+1;
 
         const newHero = {
-            "id": id,
-            "name": req.body["name"],
-            "role": req.body["role"]
+            "id": newId,
+            "name": req.body["name"]
 
         }
 
@@ -42,9 +43,6 @@ module.exports = {
                 if(body["name"] !== ""){
                     hero["name"] = body["name"];
                 }
-                if(body["role"] !== ""){
-                    hero["role"] = body["role"];
-                }
             }
 
             return hero
@@ -58,7 +56,6 @@ module.exports = {
     },
 
     deleteHero: (req, res) => {
-        console.log(req.params.id)
         heroes = heroes.filter(hero => 
         req.params.id !== ":" + hero["id"])
 
