@@ -40,22 +40,39 @@ class Hero extends Component{
         return(
             <div className="HeroBox">
                 <h2>{this.props.name} </h2>
-                {/*img of the hero*/}
-                <p>{this.props.role}</p>
-
-                <button style={{display:this.state.allowEdit ? 'none' : 'inline-block'}}
-                onClick={() => this.diplayEditInfo()}>Edit info</button>
-                
                 <br/>
 
-                <button onClick={() => this.props.delete(id, name, role)}
-                style={{display: this.state.deleteConfirm ? 'none' : 'inline-block',
-                display:this.state.allowEdit ? 'none': 'inline-block' }}>Delete Hero</button>
+                <img src = {this.props.imgSrc}/>
+
+                <p>{this.props.role}</p>
+
+                <div style={{display:this.state.allowEdit ? 'none' : 'inline-block'}}>
+                    <button onClick={() =>{ 
+                        this.diplayEditInfo()
+                        this.setState({deleteConfirm:false})
+                        }}>Edit info</button>
+                    
+                    <br/>
+
+                    <button onClick={() => this.setState({deleteConfirm: true})}
+                    style={{display: this.state.deleteConfirm ? 'none' : 'inline-block' }}>Delete Hero</button>
+
+                </div>    
+
+                <div style={{display: this.state.deleteConfirm ? 'block' : 'none'}}>
+                    <p>Are you sure?</p>
+                    <button onClick={() => {
+                        this.props.delete(id, name, role)
+                        this.setState({deleteConfirm:false})}}>Yes</button>
+                    <button onClick={() => this.setState({deleteConfirm:false})}>No</button>
+                </div>
+
 
                 <div style ={{display: this.state.allowEdit ? 'block' : 'none' }}>
-                    <input onChange={(e) => this.nameInput(e.target.value)}
-                     placeholder="Name..."
-                     onKeyPress= {(e) => {
+                    <input className="HeroInput"
+                    onChange={(e) => this.nameInput(e.target.value)}
+                    placeholder="Name..."
+                    onKeyPress= {(e) => {
                         if(e.key === 'Enter'){
                             this.props.edit(id, this.state.editedName, this.state.editedRole)
                             this.setState({allowEdit:false})
@@ -65,9 +82,10 @@ class Hero extends Component{
                      />
                     <br/>
 
-                    <input onChange={(e) => this.roleInput(e.target.value)}
-                     placeholder = "Role..."
-                     onKeyPress= {(e) => {
+                    <input className="HeroInput"
+                    onChange={(e) => this.roleInput(e.target.value)}
+                    placeholder = "Role..."
+                    onKeyPress= {(e) => {
                         if(e.key === 'Enter'){
                             this.props.edit(id, this.state.editedName, this.state.editedRole)
                             this.setState({allowEdit:false})

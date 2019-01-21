@@ -1,24 +1,16 @@
-var heroes = [{
-    "id": 1,
-    "name": "Ana",
-    "role": "Support"
+const axios = require('axios')
 
-},
-{
-    "id": 2,
-    "name": "Reaper",
-    "role": "Damage"
-
-},
-{
-    "id": 3,
-    "name": "Widowmaker",
-    "role": "Damage"
-}
+var heroes = [
 
 ];
 
 id = heroes.length +1;
+
+axios.get('https://overwatch-api.net/api/v1/hero')
+.then(response => {
+    heroes = response.data[0];
+    console.log(heroes)
+})
 
 
 module.exports = {
@@ -66,10 +58,9 @@ module.exports = {
     },
 
     deleteHero: (req, res) => {
-        const {body} = req;
-        console.log(body)
+        console.log(req.params.id)
         heroes = heroes.filter(hero => 
-        body["id"] !== hero["id"])
+        req.params.id !== ":" + hero["id"])
 
         res.status(200).send(heroes)
     }

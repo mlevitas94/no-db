@@ -23,7 +23,8 @@ class Input extends Component{
                           }
                         }
                     }
-                     placeholder="Enter hero name"/>
+                     placeholder="Enter hero name..."/>
+                     <br/>
                 <button onClick={() => this.props.filter(this.state.userInput)}>Filter Heroes</button>
             </div>
         );

@@ -68,15 +68,14 @@ editHero(id, name, role){
   })
 }
 
-deleteHero(id, name, role){
-  let toBeDeleted = {
-    "id" : id,
-    "name" : name,
-    "role" : role
-  }
-  console.log(toBeDeleted)
 
-  axios.delete('/api/heroes', toBeDeleted)
+
+
+deleteHero(id){
+  
+  console.log(id)
+
+  axios.delete(`/api/heroes/:${id}`)
   .then(response => {
     this.setState({
       heroes: response.data
@@ -95,9 +94,18 @@ deleteHero(id, name, role){
       this.setState({
         heroes: response.data
       })
+      console.log(this.state.heroes)
     })
   }
+
+
+
+
+
+
   render() {
+    
+
     let shownHeroes = this.state.heroes.filter((hero, i) => {
       if(this.state.filteredInput === ""){
         return true
@@ -115,6 +123,7 @@ deleteHero(id, name, role){
           id={hero["id"]}
           edit={this.editHero}
           delete={this.deleteHero}
+          imgSrc={require('./images/' + hero["name"] + '.png')} 
           />
         )
       }

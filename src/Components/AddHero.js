@@ -24,11 +24,27 @@ class AddHero extends Component{
     render(){
         return (
             <div>
-                <input onChange={(e) => this.updateHeroInput(e.target.value)} placeholder="Hero Name..."/>
+                <input onChange={(e) => this.updateHeroInput(e.target.value)}
+                onKeyPress= {(e) => {
+                    if(e.key === 'Enter'){
+                        this.props.add(this.state.heroInput, this.state.roleInput)
+                        this.setState({allowEdit:false})
+                         }
+                       }
+                   }
+                    placeholder="Hero Name..."/>
     
                 <br/>
     
-                <input onChange={(e) => this.updateRoleInput(e.target.value)} placeholder="Hero role..."/>
+                <input onChange={(e) => this.updateRoleInput(e.target.value)}
+                onKeyPress= {(e) => {
+                    if(e.key === 'Enter'){
+                        this.props.add(this.state.heroInput, this.state.roleInput)
+                        this.setState({allowEdit:false})
+                         }
+                       }
+                   }
+                    placeholder="Hero Role..."/>
     
                 <br/>
     
