@@ -60,7 +60,8 @@ class Hero extends Component{
 
                 </div>    
 
-                <div style={{display: this.state.deleteConfirm ? 'block' : 'none'}}>
+                <div className="confirmButtons"
+                style={{display: this.state.deleteConfirm ? 'block' : 'none'}}>
                     <p>Are you sure?</p>
                     <button onClick={() => {
                         this.props.delete(id, name)

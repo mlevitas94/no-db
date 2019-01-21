@@ -4,6 +4,7 @@ import axios from 'axios'
 import Input from './Components/Input'
 import Hero from './Components/Hero'
 import AddHero from './Components/AddHero'
+import Header from './Components/Header'
 
 
 class App extends Component {
@@ -69,8 +70,6 @@ editHero(id, name){
 
 
 deleteHero(id){
-  
-  console.log(id)
 
   axios.delete(`/api/heroes/:${id}`)
   .then(response => {
@@ -140,7 +139,7 @@ deleteHero(id){
 
     return (
       <div className="App">
-        <h1>Overwatch Heroes</h1>
+        <Header/>
 
         <Input filter={this.filterHeroes}/>
 
